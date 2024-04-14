@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdf8a80cf1ddbb4985424f2de3eb3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyMovement: {fileID: 5858988155691155640}
 --- !u!114 &5858988155691155640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d195cf0c3eb044f991883cc3b1b793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyController: {fileID: 8431487005675951428}
   _navMeshAgent: {fileID: 1920447467013236838}
-  _player: {fileID: 0}
 --- !u!1001 &8595170099333950183
 PrefabInstance:
   m_ObjectHideFlags: 0
