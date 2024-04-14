@@ -33,14 +33,14 @@ namespace SurvivalShooter.Player
             {
                 _movementDirection = _inputController.Direction;
             }
-
-            Turn(_movementDirection);
+            
             _playerController.Animator.SetBool("IsWalking", _isMoving);
         }
 
         private void FixedUpdate()
         {
             Move(_inputController.Direction);
+            Turn(_movementDirection);
         }
 
         private void Move(Vector2 input)
@@ -52,7 +52,7 @@ namespace SurvivalShooter.Player
         {
             if(direction.sqrMagnitude > 0)
             {
-                Vector3 newDirection = Vector3.RotateTowards(transform.forward, new Vector3(direction.x, 0f, direction.y).normalized, _rotateSpeed * Time.deltaTime, 0f);
+                Vector3 newDirection = Vector3.RotateTowards(transform.forward, new Vector3(direction.x, 0f, direction.y).normalized, _rotateSpeed * Time.fixedDeltaTime, 0f);
                 transform.LookAt(transform.position + newDirection);
             }
         }
