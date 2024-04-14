@@ -8,7 +8,7 @@ namespace SurvivalShooter.Services
     {
         private static Dictionary<Type, IService> _services = new();
 
-        public static void RegisterService<T>(IService service) where T : IService
+        public static void Register<T>(IService service) where T : IService
         {
             if(_services.ContainsKey(typeof(T)))
             {
@@ -21,7 +21,7 @@ namespace SurvivalShooter.Services
             Debug.Log($"{service.GetType().Name} registered as {typeof(T).Name}");
         }
 
-        public static void DeregisterService<T>(IService service) where T : IService
+        public static void Deregister<T>(IService service) where T : IService
         {
             if(_services.ContainsKey(typeof(T)))
             {
@@ -31,7 +31,7 @@ namespace SurvivalShooter.Services
             }
         }
 
-        public static T GetService<T>() where T : IService
+        public static T Get<T>() where T : IService
         {
             IService service = default;
 

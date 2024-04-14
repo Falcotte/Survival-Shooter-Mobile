@@ -6,12 +6,12 @@ namespace SurvivalShooter.Services
     {
         protected virtual void Awake()
         {
-            RegisterService();
+            Register();
         }
 
-        public void RegisterService()
+        public void Register()
         {
-            ServiceLocator.RegisterService<T>(this);
+            ServiceLocator.Register<T>(this);
         }
     }
 }
