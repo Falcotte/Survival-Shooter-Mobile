@@ -7,7 +7,7 @@ namespace SurvivalShooter.Loading
 {
     public class LoadingService : BaseService<ILoadingService>, ILoadingService
     {
-        [SerializeField] private List<string> permanentScenes;
+        [SerializeField] private List<string> _permanentScenes;
 
         protected override void Awake()
         {
@@ -26,9 +26,9 @@ namespace SurvivalShooter.Loading
             SceneManager.sceneLoaded -= SetActiveScene;
         }
 
-        public void LoadPermanentScenes()
+        private void LoadPermanentScenes()
         {
-            foreach(var scene in permanentScenes)
+            foreach(var scene in _permanentScenes)
             {
                 if(!IsSceneLoaded(scene))
                 {
