@@ -142,7 +142,7 @@ MonoBehaviour:
   _background: {fileID: 2509528871978548914}
   _handle: {fileID: 364020440807054039}
   _activeColor: {r: 0.64705884, g: 0.7176471, b: 0.8627451, a: 1}
-  _inactiveColor: {r: 0.64705884, g: 0.7176471, b: 0.8627451, a: 1}
+  _inactiveColor: {r: 0.64705884, g: 0.7176471, b: 0.8627451, a: 0}
   _colorChangeDelay: 0
   _colorChangeSpeed: 0.2
 --- !u!1 &8153026618547321033
