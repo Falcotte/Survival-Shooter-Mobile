@@ -43,7 +43,9 @@ GameObject:
   - component: {fileID: 8995352080281765066}
   - component: {fileID: 7538161394724598294}
   - component: {fileID: 2868804024345596440}
+  - component: {fileID: 8196862520195229416}
   - component: {fileID: 1020441135805176287}
+  - component: {fileID: 5001669363220449406}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,6 +119,21 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0.2, y: 0.6, z: 0}
+--- !u!114 &8196862520195229416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7793226920827408138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e39be9a6d4f1e34eaf3039e84f65d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3253340619330623353}
+  _playerMovement: {fileID: 1020441135805176287}
+  _playerHealth: {fileID: 5001669363220449406}
 --- !u!114 &1020441135805176287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,10 +146,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3502584f5eebbf748ace1156f66df3e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerController: {fileID: 8196862520195229416}
   _rigidbody: {fileID: 7538161394724598294}
-  _animator: {fileID: 3253340619330623353}
   _moveSpeed: 4
   _rotateSpeed: 12
+--- !u!114 &5001669363220449406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7793226920827408138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af83fadfbe794e840abc9cef3436155b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerController: {fileID: 8196862520195229416}
+  _startingHealth: 100
 --- !u!1001 &3253340619323335193
 PrefabInstance:
   m_ObjectHideFlags: 0

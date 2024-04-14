@@ -6,8 +6,9 @@ namespace SurvivalShooter.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        [SerializeField] private PlayerController _playerController;
+
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Animator _animator;
 
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _rotateSpeed;
@@ -34,7 +35,7 @@ namespace SurvivalShooter.Player
             }
 
             Turn(_movementDirection);
-            _animator.SetBool("IsWalking", _isMoving);
+            _playerController.Animator.SetBool("IsWalking", _isMoving);
         }
 
         private void FixedUpdate()
