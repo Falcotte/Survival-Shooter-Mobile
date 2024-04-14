@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7538161394724598294}
   _animator: {fileID: 3253340619330623353}
-  _moveSpeed: 6
+  _moveSpeed: 4
   _rotateSpeed: 12
 --- !u!1001 &3253340619323335193
 PrefabInstance:

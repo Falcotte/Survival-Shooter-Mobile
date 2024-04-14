@@ -44,7 +44,7 @@ namespace SurvivalShooter.Player
 
         private void Move(Vector2 input)
         {
-            _rigidbody.MovePosition(_rigidbody.position + new Vector3(input.x, 0f, input.y) * _moveSpeed * Time.fixedDeltaTime);
+            _rigidbody.MovePosition(_rigidbody.position + new Vector3(input.x, 0f, input.y).normalized * _moveSpeed * Time.fixedDeltaTime);
         }
 
         private void Turn(Vector2 direction)
