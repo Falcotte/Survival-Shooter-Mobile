@@ -10,19 +10,22 @@ namespace SurvivalShooter.Player
 
         private void OnEnable()
         {
-            
+            EnemyHealth.OnEnemyDeath += RemoveEnemyFromRange;
         }
 
         private void OnDisable()
         {
-            
+            EnemyHealth.OnEnemyDeath -= RemoveEnemyFromRange;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent(out EnemyController enemyController))
             {
-                _enemiesInRange.Add(enemyController);
+                if(enemyController.EnemyHealth.CurrentHealth > 0)
+                {
+                    _enemiesInRange.Add(enemyController);
+                }
             }
         }
 

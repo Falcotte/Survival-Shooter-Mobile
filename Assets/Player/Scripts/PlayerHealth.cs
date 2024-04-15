@@ -13,6 +13,7 @@ namespace SurvivalShooter.Player
         private bool _isDead;
 
         public static Action<float> OnTakeDamage;
+        public static Action OnPlayerDeath;
 
         private void Start()
         {

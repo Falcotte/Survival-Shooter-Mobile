@@ -1,3 +1,4 @@
+using SurvivalShooter.Enemy;
 using UnityEngine;
 
 namespace SurvivalShooter.Player
@@ -42,7 +43,7 @@ namespace SurvivalShooter.Player
 
             if(_closestEnemy != null && _timer >= _timeBetweenBullets)
             {
-                Shoot();
+                AttemptToShoot();
             }
 
             if(_timer >= _timeBetweenBullets * _effectsDisplayTime)
@@ -51,7 +52,21 @@ namespace SurvivalShooter.Player
             }
         }
 
-        void Shoot()
+        private void AttemptToShoot()
+        {
+            _shootRay.origin = _gunBarrelEnd.position;
+            _shootRay.direction = _gunBarrelEnd.forward;
+
+            if(Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
+            {
+                if(_shootHit.collider.GetComponent<EnemyController>() != null)
+                {
+                    Shoot();
+                }
+            }
+        }
+
+        private void Shoot()
         {
             _timer = 0f;
 
@@ -64,17 +79,12 @@ namespace SurvivalShooter.Player
             _gunLine.enabled = true;
             _gunLine.SetPosition(0, _gunBarrelEnd.position);
 
-            _shootRay.origin = _gunBarrelEnd.position;
-            _shootRay.direction = _gunBarrelEnd.forward;
-
             if(Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
             {
-                //EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-
-                //if(enemyHealth != null)
-                //{
-                //    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-                //}
+                if(_shootHit.collider.TryGetComponent(out EnemyController enemyController))
+                {
+                    enemyController.EnemyHealth.TakeDamage(_damagePerShot, _shootHit.point);
+                }
 
                 _gunLine.SetPosition(1, _shootHit.point);
             }

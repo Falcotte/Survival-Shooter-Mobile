@@ -1,5 +1,5 @@
+using SurvivalShooter.Player;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace SurvivalShooter.Enemy
 {
@@ -7,11 +7,30 @@ namespace SurvivalShooter.Enemy
     {
         [SerializeField] private EnemyController _enemyController;
 
-        [SerializeField] private NavMeshAgent _navMeshAgent;
+        private bool _isPlayerDead;
+
+        private void OnEnable()
+        {
+            PlayerHealth.OnPlayerDeath += DisableEnemyMovement;
+        }
+
+        private void OnDisable()
+        {
+            PlayerHealth.OnPlayerDeath -= DisableEnemyMovement;
+        }
 
         private void Update()
         {
-            _navMeshAgent.SetDestination(_enemyController.PlayerTransform.position);
+            if(_enemyController.EnemyHealth.CurrentHealth > 0 && !_isPlayerDead)
+            {
+                _enemyController.NavMeshAgent.SetDestination(_enemyController.PlayerTransform.position);
+            }
+        }
+
+        private void DisableEnemyMovement()
+        {
+            _isPlayerDead = true;
+            _enemyController.NavMeshAgent.enabled = false;
         }
     }
 }
