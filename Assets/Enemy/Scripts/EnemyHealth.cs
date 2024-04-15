@@ -10,6 +10,7 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CapsuleCollider _capsuleCollider;
         [SerializeField] private ParticleSystem _hitParticles;
+        [SerializeField] private ParticleSystem _deathParticles;
 
         [SerializeField] private int _startingHealth = 100;
         [SerializeField] private int _currentHealth;
@@ -60,6 +61,7 @@ namespace SurvivalShooter.Enemy
             _capsuleCollider.enabled = false;
 
             _enemyController.Animator.SetTrigger("Dead");
+            _deathParticles.Play();
         }
 
         public void StartSinking()
