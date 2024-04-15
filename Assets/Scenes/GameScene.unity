@@ -748,6 +748,8 @@ MonoBehaviour:
   _playerTransform: {fileID: 1810144899}
   _enemyControllerPrefabs:
   - {fileID: 8431487005675951428, guid: 7537b60fe7d81d64e8388babdd74de39, type: 3}
+  - {fileID: 8431487005675951428, guid: 53fa5517755fded46b28aee74c169f66, type: 3}
+  - {fileID: 8431487005675951428, guid: a155d77a157d52a4b81c0197fbfcbf8f, type: 3}
   _spawnPoints:
   - {fileID: 37453091}
   - {fileID: 763340839}

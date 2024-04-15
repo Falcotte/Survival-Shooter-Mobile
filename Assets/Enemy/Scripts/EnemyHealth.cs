@@ -13,7 +13,7 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private ParticleSystem _deathParticles;
 
         [SerializeField] private int _startingHealth = 100;
-        [SerializeField] private int _currentHealth;
+        private int _currentHealth;
         public int CurrentHealth => _currentHealth;
         [SerializeField] private float _sinkSpeed = 2.5f;
 
