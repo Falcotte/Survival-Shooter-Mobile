@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SurvivalShooter.Player;
 using UnityEngine;
 
 namespace SurvivalShooter.Enemy
@@ -14,11 +15,23 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private float _spawnFrequency;
         private float _spawnTimer;
 
+        private bool _isSpawning = true;
+
+        private void OnEnable()
+        {
+            PlayerHealth.OnPlayerDeath += DisableSpawning;
+        }
+
+        private void OnDisable()
+        {
+            PlayerHealth.OnPlayerDeath -= DisableSpawning;
+        }
+
         private void Update()
         {
             _spawnTimer += Time.deltaTime;
 
-            if(_spawnTimer >= _spawnFrequency)
+            if(_isSpawning && _spawnTimer >= _spawnFrequency)
             {
                 SpawnEnemy();
                 _spawnTimer = 0f;
@@ -35,6 +48,11 @@ namespace SurvivalShooter.Enemy
             enemyController.transform.rotation = _spawnPoints[randomSpawnPointIndex].rotation;
 
             enemyController.PlayerTransform = _playerTransform;
+        }
+
+        private void DisableSpawning()
+        {
+            _isSpawning = false;
         }
     }
 }

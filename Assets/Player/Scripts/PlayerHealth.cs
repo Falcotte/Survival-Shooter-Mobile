@@ -9,6 +9,7 @@ namespace SurvivalShooter.Player
 
         [SerializeField] private int _startingHealth = 100;
         private int _currentHealth;
+        public int CurrentHealth => _currentHealth;
 
         private bool _isDead;
 
@@ -36,10 +37,12 @@ namespace SurvivalShooter.Player
         private void Die()
         {
             _isDead = true;
+            OnPlayerDeath?.Invoke();
 
             _playerController.Animator.SetTrigger("Die");
 
             _playerController.PlayerMovement.enabled = false;
+            _playerController.PlayerShooting.enabled = false;
         }
     }
 }

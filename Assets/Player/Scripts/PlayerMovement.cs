@@ -35,6 +35,10 @@ namespace SurvivalShooter.Player
             {
                 _movementDirection = _inputController.Direction;
             }
+            else
+            {
+                _movementDirection = Vector2.zero;
+            }
 
             _playerController.Animator.SetBool("IsWalking", _isMoving);
         }

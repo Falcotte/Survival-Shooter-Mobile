@@ -9941,6 +9941,7 @@ GameObject:
   - component: {fileID: 1920447467013236838}
   - component: {fileID: 8431487005675951428}
   - component: {fileID: 5858988155691155640}
+  - component: {fileID: 2928241585057599062}
   m_Layer: 9
   m_Name: Zombunny
   m_TagString: Untagged
@@ -10088,6 +10089,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyController: {fileID: 8431487005675951428}
+--- !u!114 &2928241585057599062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902273680358304942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3071a3d652d1f1649961283a30665323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeBetweenAttacks: 0.5
+  _attackDamage: 10
+  _enemyController: {fileID: 8431487005675951428}
 --- !u!1001 &8595170099333950183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10195,7 +10211,6 @@ MonoBehaviour:
   _hitParticles: {fileID: 4594153995287866984}
   _deathParticles: {fileID: 3927754688311745556}
   _startingHealth: 100
-  _currentHealth: 0
   _sinkSpeed: 2.5
   _scoreValue: 10
 --- !u!4 &8595170099334082605 stripped
