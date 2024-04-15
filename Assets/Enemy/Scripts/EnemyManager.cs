@@ -28,7 +28,11 @@ namespace SurvivalShooter.Enemy
         public void SpawnEnemy()
         {
             var enemyController = Instantiate(_enemyControllerPrefabs[Random.Range(0, _enemyControllerPrefabs.Count)], transform);
-            enemyController.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Count)].position;
+
+            int randomSpawnPointIndex = Random.Range(0, _spawnPoints.Count);
+
+            enemyController.transform.position = _spawnPoints[randomSpawnPointIndex].position;
+            enemyController.transform.rotation = _spawnPoints[randomSpawnPointIndex].rotation;
 
             enemyController.PlayerTransform = _playerTransform;
         }
