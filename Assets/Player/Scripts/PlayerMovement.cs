@@ -16,6 +16,8 @@ namespace SurvivalShooter.Player
         private Vector3 _movementDirection;
         private bool _isMoving;
 
+        private Transform _closestEnemy;
+
         private IInputService _inputService;
         private IInputController _inputController;
 
@@ -33,14 +35,19 @@ namespace SurvivalShooter.Player
             {
                 _movementDirection = _inputController.Direction;
             }
-            
+
             _playerController.Animator.SetBool("IsWalking", _isMoving);
         }
 
         private void FixedUpdate()
         {
             Move(_inputController.Direction);
-            Turn(_movementDirection);
+
+            _closestEnemy = _playerController.PlayerRange.GetClosestEnemy()?.transform;
+
+            Turn(_closestEnemy == null ? _movementDirection : 
+                new Vector2(_closestEnemy.position.x - _playerController.PlayerShooting.GunBarrelEnd.position.x,
+                _closestEnemy.position.z - _playerController.PlayerShooting.GunBarrelEnd.position.z));
         }
 
         private void Move(Vector2 input)
