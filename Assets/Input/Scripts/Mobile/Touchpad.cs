@@ -8,7 +8,7 @@ namespace SurvivalShooter.Inputs.Mobile
     public class Touchpad : MonoBehaviour
     {
         [SerializeField] private RectTransform _container;
-        [SerializeField] private RectTransform _background;
+        [SerializeField] private RectTransform _backgroundBorders;
         [SerializeField] private RectTransform _handle;
 
         public Vector2 Position => _container.anchoredPosition;
@@ -34,7 +34,7 @@ namespace SurvivalShooter.Inputs.Mobile
         {
             Register();
 
-            Radius = _background.rect.size.x;
+            Radius = _backgroundBorders.rect.size.x;
 
             SetVisuals();
         }
