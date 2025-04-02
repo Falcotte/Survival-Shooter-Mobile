@@ -13,6 +13,9 @@ namespace SurvivalShooter.Player
         [SerializeField] private float _timeBetweenBullets = 0.15f;
         [SerializeField] private float _range = 100f;
 
+        [SerializeField] private float _maxShotSpread;
+        [SerializeField] [Range(0f, 100f)] private float _accuracy;
+        
         [SerializeField] private ParticleSystem _gunParticles;
         [SerializeField] private LineRenderer _gunLine;
         [SerializeField] private Light _gunLight;
@@ -41,12 +44,12 @@ namespace SurvivalShooter.Player
 
             _timer += Time.deltaTime;
 
-            if(_closestEnemy != null && _timer >= _timeBetweenBullets)
+            if (_closestEnemy != null && _timer >= _timeBetweenBullets)
             {
                 AttemptToShoot();
             }
 
-            if(_timer >= _timeBetweenBullets * _effectsDisplayTime)
+            if (_timer >= _timeBetweenBullets * _effectsDisplayTime)
             {
                 DisableEffects();
             }
@@ -57,9 +60,9 @@ namespace SurvivalShooter.Player
             _shootRay.origin = _gunBarrelEnd.position;
             _shootRay.direction = _gunBarrelEnd.forward;
 
-            if(Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
+            if (Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
             {
-                if(_shootHit.collider.GetComponent<EnemyController>() != null)
+                if (_shootHit.collider.GetComponent<EnemyController>() != null)
                 {
                     Shoot();
                 }
@@ -79,9 +82,12 @@ namespace SurvivalShooter.Player
             _gunLine.enabled = true;
             _gunLine.SetPosition(0, _gunBarrelEnd.position);
 
-            if(Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
+            _shootRay.direction += Random.insideUnitSphere * (100 - _accuracy) / 100 * _maxShotSpread;
+            _shootRay.direction = new Vector3(_shootRay.direction.x, 0f, _shootRay.direction.z);
+            
+            if (Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
             {
-                if(_shootHit.collider.TryGetComponent(out EnemyController enemyController))
+                if (_shootHit.collider.TryGetComponent(out EnemyController enemyController))
                 {
                     enemyController.EnemyHealth.TakeDamage(_damagePerShot, _shootHit.point);
                 }
