@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EyesMaterial
+  m_Name: ZombunnyEyesMaterial
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -138,9 +138,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.3088235, g: 0.3088235, b: 0.3088235, a: 0.99999994}
+    - _BaseColor: {r: 1, g: 0.41823888, b: 0.9173132, a: 1}
+    - _Color: {r: 1, g: 0.41823885, b: 0.9173132, a: 1}
+    - _EmissionColor: {r: 0.57232696, g: 0, b: 0.4909811, a: 0.99999994}
     - _EmissionColorUI: {r: 0.30882353, g: 0.30882353, b: 0.30882353, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0.2, g: 0.2, b: 0.2, a: 0}
