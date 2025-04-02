@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1167517978229846989}
   - component: {fileID: 3927754688311745556}
   - component: {fileID: 4563335833389317695}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: DeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9808,6 +9808,75 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4264153851178065267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4996839508749912355}
+  - component: {fileID: 6907209401141179991}
+  - component: {fileID: 4550305229260135593}
+  m_Layer: 0
+  m_Name: ZombunnyAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4996839508749912355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264153851178065267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 614399888735275563}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6907209401141179991
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264153851178065267}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &4550305229260135593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264153851178065267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3071a3d652d1f1649961283a30665323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeBetweenAttacks: 0.5
+  _attackDamage: 10
+  _enemyController: {fileID: 8431487005675951428}
 --- !u!1 &4832286444523340227
 GameObject:
   m_ObjectHideFlags: 0
@@ -9937,11 +10006,9 @@ GameObject:
   - component: {fileID: 614399888735275563}
   - component: {fileID: 1683908082519539363}
   - component: {fileID: 761077603792846116}
-  - component: {fileID: 4044938821865630380}
   - component: {fileID: 1920447467013236838}
   - component: {fileID: 8431487005675951428}
   - component: {fileID: 5858988155691155640}
-  - component: {fileID: 2928241585057599062}
   m_Layer: 9
   m_Name: Zombunny
   m_TagString: Untagged
@@ -9963,6 +10030,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6766815537749369188}
+  - {fileID: 4996839508749912355}
   - {fileID: 5622438309528064687}
   - {fileID: 1167517978229846989}
   m_Father: {fileID: 0}
@@ -10013,30 +10081,9 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
---- !u!135 &4044938821865630380
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5902273680358304942}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.8
   m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!195 &1920447467013236838
 NavMeshAgent:
@@ -10075,7 +10122,7 @@ MonoBehaviour:
   _animator: {fileID: 8595170099324460935}
   _navMeshAgent: {fileID: 1920447467013236838}
   _enemyMovement: {fileID: 5858988155691155640}
-  _enemyHealth: {fileID: 8332750635464764985}
+  _enemyHealth: {fileID: 7525298588733209159}
 --- !u!114 &5858988155691155640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10088,21 +10135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d195cf0c3eb044f991883cc3b1b793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyController: {fileID: 8431487005675951428}
---- !u!114 &2928241585057599062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5902273680358304942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3071a3d652d1f1649961283a30665323, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeBetweenAttacks: 0.5
-  _attackDamage: 10
   _enemyController: {fileID: 8431487005675951428}
 --- !u!1001 &8595170099333950183
 PrefabInstance:
@@ -10179,7 +10211,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100074, guid: be66986effd141b4992d2d78be127139,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8332750635464764985}
+      addedObject: {fileID: 7525298588733209159}
   m_SourcePrefab: {fileID: 100100000, guid: be66986effd141b4992d2d78be127139, type: 3}
 --- !u!95 &8595170099324460935 stripped
 Animator:
@@ -10193,7 +10225,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8595170099333950183}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8332750635464764985
+--- !u!114 &7525298588733209159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10210,6 +10242,8 @@ MonoBehaviour:
   _capsuleCollider: {fileID: 761077603792846116}
   _hitParticles: {fileID: 4594153995287866984}
   _deathParticles: {fileID: 3927754688311745556}
+  _bodyCenterPosition: {x: 0, y: 0.5, z: 0}
+  _hitParticlesRotationOffset: {x: -30, y: 30}
   _startingHealth: 100
   _sinkSpeed: 2.5
   _scoreValue: 10

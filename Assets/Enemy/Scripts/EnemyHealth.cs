@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SurvivalShooter.Enemy
 {
@@ -11,6 +12,9 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private CapsuleCollider _capsuleCollider;
         [SerializeField] private ParticleSystem _hitParticles;
         [SerializeField] private ParticleSystem _deathParticles;
+
+        [SerializeField] private Vector3 _bodyCenterPosition;
+        [SerializeField] private Vector2 _hitParticlesRotationOffset;
 
         [SerializeField] private int _startingHealth = 100;
         private int _currentHealth;
@@ -31,7 +35,7 @@ namespace SurvivalShooter.Enemy
 
         private void Update()
         {
-            if(_isSinking)
+            if (_isSinking)
             {
                 transform.Translate(-Vector3.up * _sinkSpeed * Time.deltaTime);
             }
@@ -39,15 +43,20 @@ namespace SurvivalShooter.Enemy
 
         public void TakeDamage(int amount, Vector3 hitPoint)
         {
-            if(_isDead)
+            if (_isDead)
                 return;
 
             _currentHealth -= amount;
 
             _hitParticles.transform.position = hitPoint;
+            _hitParticles.transform.rotation = Quaternion.LookRotation(_bodyCenterPosition - hitPoint) *
+                                               Quaternion.Euler(
+                                                   Random.Range(_hitParticlesRotationOffset.x, _hitParticlesRotationOffset.y),
+                                                   Random.Range(_hitParticlesRotationOffset.x, _hitParticlesRotationOffset.y), 0);
+
             _hitParticles.Play();
 
-            if(_currentHealth <= 0)
+            if (_currentHealth <= 0)
             {
                 Die();
             }
@@ -57,7 +66,7 @@ namespace SurvivalShooter.Enemy
         {
             _isDead = true;
             OnEnemyDeath?.Invoke(_enemyController);
-           
+
             _capsuleCollider.enabled = false;
 
             _enemyController.Animator.SetTrigger("Dead");
