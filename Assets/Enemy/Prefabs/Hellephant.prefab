@@ -10094,7 +10094,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5902273680358304942}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.2
+  m_Radius: 1.3
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -10237,7 +10237,7 @@ MonoBehaviour:
   _hitParticlesRotationOffset: {x: -30, y: 30}
   _startingHealth: 100
   _sinkSpeed: 2.5
-  _scoreValue: 10
+  _scoreValue: 25
 --- !u!4 &4288469276473223124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: b77f122f451a2394898a24191c26107c,

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using SurvivalShooter.Enemy;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace SurvivalShooter.Player
 
         [SerializeField] private float _maxShotSpread;
         [SerializeField] [Range(0f, 100f)] private float _accuracy;
-        
+
         [SerializeField] private ParticleSystem _gunParticles;
         [SerializeField] private LineRenderer _gunLine;
         [SerializeField] private Light _gunLight;
@@ -84,7 +85,7 @@ namespace SurvivalShooter.Player
 
             _shootRay.direction += Random.insideUnitSphere * (100 - _accuracy) / 100 * _maxShotSpread;
             _shootRay.direction = new Vector3(_shootRay.direction.x, 0f, _shootRay.direction.z);
-            
+
             if (Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
             {
                 if (_shootHit.collider.TryGetComponent(out EnemyController enemyController))
@@ -92,11 +93,16 @@ namespace SurvivalShooter.Player
                     enemyController.EnemyHealth.TakeDamage(_damagePerShot, _shootHit.point);
                 }
 
-                _gunLine.SetPosition(1, _shootHit.point);
+                _gunLine.SetPosition(1, _gunBarrelEnd.position);
+                DOTween.To(() => _gunLine.GetPosition(1), (x) => _gunLine.SetPosition(1, x), _shootHit.point,
+                    _timeBetweenBullets * _effectsDisplayTime);
             }
             else
             {
-                _gunLine.SetPosition(1, _shootRay.origin + _shootRay.direction * _range);
+                _gunLine.SetPosition(1, _gunBarrelEnd.position);
+                DOTween.To(() => _gunLine.GetPosition(1), (x) => _gunLine.SetPosition(1, x),
+                    _shootRay.origin + _shootRay.direction * _range,
+                    _timeBetweenBullets * _effectsDisplayTime);
             }
         }
 

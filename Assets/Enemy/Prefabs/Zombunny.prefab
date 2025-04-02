@@ -10094,7 +10094,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5902273680358304942}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
@@ -10244,7 +10244,7 @@ MonoBehaviour:
   _deathParticles: {fileID: 3927754688311745556}
   _bodyCenterPosition: {x: 0, y: 0.5, z: 0}
   _hitParticlesRotationOffset: {x: -30, y: 30}
-  _startingHealth: 100
+  _startingHealth: 60
   _sinkSpeed: 2.5
   _scoreValue: 10
 --- !u!4 &8595170099334082605 stripped

@@ -366,8 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 8196862520195229416}
   _gunBarrelEnd: {fileID: 3253340619323209887}
-  _damagePerShot: 20
-  _timeBetweenBullets: 0.15
+  _damagePerShot: 6
+  _timeBetweenBullets: 0.2
   _range: 100
   _maxShotSpread: 0.3
   _accuracy: 60
