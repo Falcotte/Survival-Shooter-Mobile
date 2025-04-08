@@ -6,40 +6,35 @@ namespace SurvivalShooter.Services
 {
     public static class ServiceLocator
     {
-        private static Dictionary<Type, IService> _services = new();
+        private static readonly Dictionary<Type, IService> Services = new();
 
         public static void Register<T>(IService service) where T : IService
         {
-            if(_services.ContainsKey(typeof(T)))
+            var type = typeof(T);
+            
+            if (!Services.TryAdd(type, service))
             {
-                Debug.LogWarning($"{service.GetType().Name} is already registered as {typeof(T).Name}");
+                Debug.LogWarning($"{service.GetType().Name} is already registered as {type.Name}");
                 return;
             }
 
-            _services.Add(typeof(T), service);
-
-            Debug.Log($"{service.GetType().Name} registered as {typeof(T).Name}");
+            Debug.Log($"{service.GetType().Name} registered as {type.Name}");
         }
 
         public static void Deregister<T>(IService service) where T : IService
         {
-            if(_services.ContainsKey(typeof(T)))
+            var type = typeof(T);
+            
+            if (Services.Remove(type))
             {
-                _services.Remove(typeof(T));
-
-                Debug.Log($"{service.GetType().Name} deregistered");
+                Debug.Log($"{type.Name} deregistered");
             }
         }
 
         public static T Get<T>() where T : IService
         {
-            IService service = default;
-
-            if(_services.TryGetValue(typeof(T), out service))
-            {
-                return (T)service;
-            }
-
+            Services.TryGetValue(typeof(T), out var service);
+            
             return (T)service;
         }
     }
