@@ -1,4 +1,8 @@
 using System;
+using SurvivalShooter.Audio;
+using SurvivalShooter.Particles;
+using SurvivalShooter.Pooling;
+using SurvivalShooter.Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,11 +14,15 @@ namespace SurvivalShooter.Enemy
 
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private CapsuleCollider _capsuleCollider;
-        [SerializeField] private ParticleSystem _hitParticles;
-        [SerializeField] private ParticleSystem _deathParticles;
 
         [SerializeField] private Vector3 _bodyCenterPosition;
         [SerializeField] private Vector2 _hitParticlesRotationOffset;
+
+        [SerializeField] private AudioKey _hurtAudioKey;
+        [SerializeField] private AudioKey _deathAudioKey;
+
+        [SerializeField] private PoolKey _hitParticlesPoolKey;
+        [SerializeField] private PoolKey _deathParticlesPoolKey;
 
         [SerializeField] private int _startingHealth = 100;
         private int _currentHealth;
@@ -23,6 +31,11 @@ namespace SurvivalShooter.Enemy
 
         [SerializeField] private int _scoreValue = 10;
 
+        private IAudioService _audioService;
+        private IPoolService _poolService;
+
+        private ParticleSystemPool _particleSystemPool;
+
         private bool _isDead;
         private bool _isSinking;
 
@@ -30,6 +43,11 @@ namespace SurvivalShooter.Enemy
 
         private void Start()
         {
+            _audioService = ServiceLocator.Get<IAudioService>();
+            _poolService = ServiceLocator.Get<IPoolService>();
+
+            _particleSystemPool = _poolService.ParticleSystemPool;
+
             _currentHealth = _startingHealth;
         }
 
@@ -48,13 +66,21 @@ namespace SurvivalShooter.Enemy
 
             _currentHealth -= amount;
 
-            _hitParticles.transform.position = hitPoint;
-            _hitParticles.transform.rotation = Quaternion.LookRotation(_bodyCenterPosition - hitPoint) *
-                                               Quaternion.Euler(
-                                                   Random.Range(_hitParticlesRotationOffset.x, _hitParticlesRotationOffset.y),
-                                                   Random.Range(_hitParticlesRotationOffset.x, _hitParticlesRotationOffset.y), 0);
+            PoolableParticleSystem hitParticles = _particleSystemPool.Get(_hitParticlesPoolKey);
 
-            _hitParticles.Play();
+            hitParticles.transform.position = hitPoint;
+
+            Vector3 hitParticlesDirection = hitPoint - _bodyCenterPosition - transform.position;
+            hitParticlesDirection.y = 0;
+
+            hitParticles.transform.rotation = Quaternion.LookRotation(hitParticlesDirection) *
+                                              Quaternion.Euler(0, Random.Range(_hitParticlesRotationOffset.x,
+                                                  _hitParticlesRotationOffset.y), 0);
+
+            hitParticles.OnStopped = (particleSystem) => _particleSystemPool.Return(particleSystem);
+            hitParticles.ParticleSystem.Play();
+
+            _audioService.PlayAudio(_hurtAudioKey);
 
             if (_currentHealth <= 0)
             {
@@ -70,7 +96,16 @@ namespace SurvivalShooter.Enemy
             _capsuleCollider.enabled = false;
 
             _enemyController.Animator.SetTrigger("Dead");
-            _deathParticles.Play();
+
+            PoolableParticleSystem deathParticles = _particleSystemPool.Get(_deathParticlesPoolKey);
+
+            deathParticles.transform.position = transform.position + Vector3.up * 0.5f;
+            deathParticles.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+
+            deathParticles.OnStopped = (particleSystem) => _particleSystemPool.Return(particleSystem);
+            deathParticles.ParticleSystem.Play();
+
+            _audioService.PlayAudio(_deathAudioKey);
         }
 
         public void StartSinking()
