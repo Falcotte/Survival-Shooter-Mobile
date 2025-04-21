@@ -731,7 +731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1262655957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,89 +772,6 @@ Transform:
   - {fileID: 718638579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1592121336
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 293596850539052184, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: _attackDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 614399888735275563, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1920447467013236838, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_Speed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5902273680358304942, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_Name
-      value: Zombear
-      objectReference: {fileID: 0}
-    - target: {fileID: 5902273680358304942, guid: 53fa5517755fded46b28aee74c169f66,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 53fa5517755fded46b28aee74c169f66, type: 3}
 --- !u!1 &1720050753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,11 +1095,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8416019416357669245, guid: 3272d8115a1cb07458bb6bdce2057e2c,
-        type: 3}
-      propertyPath: _damagePerShot
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8995352080281765066, guid: 3272d8115a1cb07458bb6bdce2057e2c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1248,4 +1160,3 @@ SceneRoots:
   - {fileID: 968793448}
   - {fileID: 2017424363180542319}
   - {fileID: 1262655958}
-  - {fileID: 1592121336}

@@ -50,8 +50,8 @@ namespace SurvivalShooter.Player
             _closestEnemy = _playerController.PlayerRange.GetClosestEnemy()?.transform;
 
             Turn(_closestEnemy == null ? _movementDirection : 
-                new Vector2(_closestEnemy.position.x - _playerController.PlayerShooting.GunBarrelEnd.position.x,
-                _closestEnemy.position.z - _playerController.PlayerShooting.GunBarrelEnd.position.z));
+                new Vector2(_closestEnemy.position.x - _playerController.PlayerShooting.GunPivot.position.x,
+                _closestEnemy.position.z - _playerController.PlayerShooting.GunPivot.position.z));
         }
 
         private void Move(Vector2 input)
