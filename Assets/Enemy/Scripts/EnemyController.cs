@@ -1,5 +1,3 @@
-using System;
-using SurvivalShooter.Player;
 using SurvivalShooter.Pooling;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,14 +19,9 @@ namespace SurvivalShooter.Enemy
         public Transform PlayerTransform { get; set; }
         public PoolKey PoolKey { get; set; }
 
-        private void Start()
-        {
-            PlayerTransform = GameObject.FindObjectOfType<PlayerController>().transform;
-        }
-
         public void Initialize()
         {
-
+            
         }
 
         public void Terminate()

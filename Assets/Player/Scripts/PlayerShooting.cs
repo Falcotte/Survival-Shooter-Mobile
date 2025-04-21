@@ -1,5 +1,7 @@
 using DG.Tweening;
+using SurvivalShooter.Audio;
 using SurvivalShooter.Enemy;
+using SurvivalShooter.Services;
 using UnityEngine;
 
 namespace SurvivalShooter.Player
@@ -7,8 +9,10 @@ namespace SurvivalShooter.Player
     public class PlayerShooting : MonoBehaviour
     {
         [SerializeField] private PlayerController _playerController;
+
+        [SerializeField] private Transform _gunPivot;
+        public Transform GunPivot => _gunPivot;
         [SerializeField] private Transform _gunBarrelEnd;
-        public Transform GunBarrelEnd => _gunBarrelEnd;
 
         [SerializeField] private int _damagePerShot = 20;
         [SerializeField] private float _timeBetweenBullets = 0.15f;
@@ -22,18 +26,22 @@ namespace SurvivalShooter.Player
         [SerializeField] private Light _gunLight;
         [SerializeField] private Light _faceLight;
 
+        private IAudioService _audioService;
+        
         private Ray _shootRay = new();
         private RaycastHit _shootHit;
         private int _shootableMask;
 
         private float _timer;
 
-        float _effectsDisplayTime = 0.2f;
+        private float _effectsDisplayTime = 0.1f;
 
         private Transform _closestEnemy;
 
         private void Start()
         {
+            _audioService = ServiceLocator.Get<IAudioService>();
+            
             _shootableMask = LayerMask.GetMask("Shootable");
 
             _timer = _timeBetweenBullets;
@@ -77,6 +85,8 @@ namespace SurvivalShooter.Player
             _gunLight.enabled = true;
             _faceLight.enabled = true;
 
+            _audioService.PlayAudio(AudioKey.PlayerGunShot);
+            
             _gunParticles.Stop();
             _gunParticles.Play();
 
@@ -85,6 +95,8 @@ namespace SurvivalShooter.Player
 
             _shootRay.direction += Random.insideUnitSphere * (100 - _accuracy) / 100 * _maxShotSpread;
             _shootRay.direction = new Vector3(_shootRay.direction.x, 0f, _shootRay.direction.z);
+
+            DOTween.Kill("GunLine");
 
             if (Physics.Raycast(_shootRay, out _shootHit, _range, _shootableMask))
             {
@@ -95,14 +107,14 @@ namespace SurvivalShooter.Player
 
                 _gunLine.SetPosition(1, _gunBarrelEnd.position);
                 DOTween.To(() => _gunLine.GetPosition(1), (x) => _gunLine.SetPosition(1, x), _shootHit.point,
-                    _timeBetweenBullets * _effectsDisplayTime);
+                    _timeBetweenBullets * _effectsDisplayTime).SetId("GunLine");
             }
             else
             {
                 _gunLine.SetPosition(1, _gunBarrelEnd.position);
                 DOTween.To(() => _gunLine.GetPosition(1), (x) => _gunLine.SetPosition(1, x),
                     _shootRay.origin + _shootRay.direction * _range,
-                    _timeBetweenBullets * _effectsDisplayTime);
+                    _timeBetweenBullets * _effectsDisplayTime).SetId("GunLine");
             }
         }
 

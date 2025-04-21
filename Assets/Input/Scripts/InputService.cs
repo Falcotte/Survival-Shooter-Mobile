@@ -20,7 +20,7 @@ namespace SurvivalShooter.Inputs
             InstantiateController(_mobileControllerPrefab);
         }
 
-        public void InstantiateController(InputController controller)
+        private void InstantiateController(InputController controller)
         {
             Instantiate(controller, _uIService.Canvas.transform);
         }

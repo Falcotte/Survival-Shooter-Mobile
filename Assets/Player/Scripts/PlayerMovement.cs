@@ -12,6 +12,8 @@ namespace SurvivalShooter.Player
 
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _rotateSpeed;
+        
+        private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
         private Vector3 _movementDirection;
         private bool _isMoving;
@@ -40,7 +42,7 @@ namespace SurvivalShooter.Player
                 _movementDirection = Vector2.zero;
             }
 
-            _playerController.Animator.SetBool("IsWalking", _isMoving);
+            _playerController.Animator.SetBool(IsWalking, _isMoving);
         }
 
         private void FixedUpdate()

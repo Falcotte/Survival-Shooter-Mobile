@@ -45,11 +45,6 @@ namespace SurvivalShooter.Enemy
             {
                 Attack();
             }
-
-            if(_playerController != null && _playerController.PlayerHealth.CurrentHealth <= 0)
-            {
-                _enemyController.Animator.SetTrigger("PlayerDead");
-            }
         }
 
 

@@ -15,7 +15,7 @@ namespace SurvivalShooter.Pooling
         private readonly Dictionary<PoolKey, Queue<T>> _pools = new();
         private readonly Dictionary<PoolKey, List<T>> _allPooledObjects = new();
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             Initialize();
         }
