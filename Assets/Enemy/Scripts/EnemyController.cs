@@ -1,9 +1,12 @@
+using System;
+using SurvivalShooter.Player;
+using SurvivalShooter.Pooling;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace SurvivalShooter.Enemy
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, IPoolable
     {
         [SerializeField] private Animator _animator;
         public Animator Animator => _animator;
@@ -15,6 +18,22 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private EnemyHealth _enemyHealth;
         public EnemyHealth EnemyHealth => _enemyHealth;
 
-        public Transform PlayerTransform { get; set; } 
+        public Transform PlayerTransform { get; set; }
+        public PoolKey PoolKey { get; set; }
+
+        private void Start()
+        {
+            PlayerTransform = GameObject.FindObjectOfType<PlayerController>().transform;
+        }
+
+        public void Initialize()
+        {
+
+        }
+
+        public void Terminate()
+        {
+
+        }
     }
 }
