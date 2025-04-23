@@ -22,12 +22,13 @@ namespace SurvivalShooter.Inputs
 
         private void InstantiateController(InputController controller)
         {
-            Instantiate(controller, _uIService.Canvas.transform);
+            InputController newController = Instantiate(controller, _uIService.Canvas.transform);
+            newController.transform.SetAsFirstSibling();
         }
 
         public void RegisterController(IInputController controller)
         {
-            if(_controllers.ContainsKey(controller.ControllerType))
+            if (_controllers.ContainsKey(controller.ControllerType))
             {
                 Debug.LogWarning($"Controller - {controller.ControllerType} already registered");
             }
@@ -38,7 +39,7 @@ namespace SurvivalShooter.Inputs
 
         public void DeregisterController(IInputController controller)
         {
-            if(_controllers.ContainsKey(controller.ControllerType))
+            if (_controllers.ContainsKey(controller.ControllerType))
             {
                 Debug.LogWarning($"Controller - {controller.ControllerType} not registered");
             }

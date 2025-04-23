@@ -8,5 +8,11 @@ namespace SurvivalShooter.Game
         public UnityAction OnGameStart { get; set; }
         public UnityAction OnGameLose { get; set; }
         public UnityAction<GameState> OnGameStateChange { get; set; }
+
+        public void GoToMainMenuState();
+        
+        public void StartGame();
+
+        public void LoseGame();
     }
 }

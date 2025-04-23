@@ -1,5 +1,6 @@
 using System;
 using SurvivalShooter.Audio;
+using SurvivalShooter.Game;
 using SurvivalShooter.Services;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace SurvivalShooter.Player
         private int _currentHealth;
         public int CurrentHealth => _currentHealth;
 
+        private IGameService _gameService;
         private IAudioService _audioService;
         
         private bool _isDead;
@@ -25,6 +27,7 @@ namespace SurvivalShooter.Player
 
         private void Start()
         {
+            _gameService = ServiceLocator.Get<IGameService>();
             _audioService = ServiceLocator.Get<IAudioService>();
             
             _currentHealth = _startingHealth;
@@ -50,6 +53,8 @@ namespace SurvivalShooter.Player
             _isDead = true;
             OnPlayerDeath?.Invoke();
 
+            _gameService.LoseGame();
+            
             _audioService.PlayAudio(_deathAudioKey);
             
             _playerController.Animator.SetTrigger("Die");

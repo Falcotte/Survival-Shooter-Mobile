@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using SurvivalShooter.Game;
 using SurvivalShooter.Player;
+using SurvivalShooter.Services;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SurvivalShooter.Enemy
 {
@@ -15,16 +19,22 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private float _spawnFrequency;
         private float _spawnTimer;
 
-        private bool _isSpawning = true;
+        private bool _isSpawning;
 
-        private void OnEnable()
+        private IGameService _gameService;
+
+        private void Start()
         {
-            PlayerHealth.OnPlayerDeath += DisableSpawning;
+            _gameService = ServiceLocator.Get<IGameService>();
+
+            _gameService.OnGameStart += EnableSpawning;
+            _gameService.OnGameLose += DisableSpawning;
         }
 
         private void OnDisable()
         {
-            PlayerHealth.OnPlayerDeath -= DisableSpawning;
+            _gameService.OnGameStart -= EnableSpawning;
+            _gameService.OnGameLose -= DisableSpawning;
         }
 
         private void Update()
@@ -38,7 +48,7 @@ namespace SurvivalShooter.Enemy
             }
         }
 
-        public void SpawnEnemy()
+        private void SpawnEnemy()
         {
             var enemyController = Instantiate(_enemyControllerPrefabs[Random.Range(0, _enemyControllerPrefabs.Count)], transform);
 
@@ -48,6 +58,11 @@ namespace SurvivalShooter.Enemy
             enemyController.transform.rotation = _spawnPoints[randomSpawnPointIndex].rotation;
 
             enemyController.PlayerTransform = _playerTransform;
+        }
+
+        private void EnableSpawning()
+        {
+            _isSpawning = true;
         }
 
         private void DisableSpawning()

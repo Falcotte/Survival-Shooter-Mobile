@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SurvivalShooter.UI
 {
-    public class GameplayView : MonoBehaviour
+    public class GameplayView : BaseView
     {
         [SerializeField] private SliderController _healthSlider;
         [SerializeField] private Image _damageImage;
