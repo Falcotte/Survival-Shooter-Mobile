@@ -3,15 +3,14 @@ using UnityEngine.Events;
 
 namespace SurvivalShooter.Game
 {
-    public class GameService : BaseService<IGameService>
+    public class GameService : BaseService<IGameService>, IGameService
     {
         private GameState _currentState = GameState.MainMenu;
         public GameState CurrentState => _currentState;
 
-        public UnityAction OnGameStart;
-        public UnityAction OnGameLose;
-
-        public UnityAction<GameState> OnGameStateChange;
+        public UnityAction OnGameStart { get; set; }
+        public UnityAction OnGameLose { get; set; }
+        public UnityAction<GameState> OnGameStateChange { get; set; }
 
         private void ChangeState(GameState gameState)
         {
@@ -19,7 +18,7 @@ namespace SurvivalShooter.Game
 
             OnGameStateChange?.Invoke(gameState);
         }
-        
+
         public void GoToMainMenuState()
         {
             ChangeState(GameState.MainMenu);
