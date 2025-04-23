@@ -21,6 +21,7 @@ namespace SurvivalShooter.UI
             restartSequence.AppendInterval(1f);
             restartSequence.AppendCallback(() =>
             {
+                _gameService.ResetGame();
                 _gameService.GoToMainMenuState();
             });
         }

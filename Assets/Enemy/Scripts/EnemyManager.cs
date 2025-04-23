@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using SurvivalShooter.Game;
-using SurvivalShooter.Player;
+using SurvivalShooter.Pooling;
 using SurvivalShooter.Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,8 +11,7 @@ namespace SurvivalShooter.Enemy
     {
         [SerializeField] private Transform _playerTransform;
         public Transform PlayerTransform => _playerTransform;
-
-        [SerializeField] private List<EnemyController> _enemyControllerPrefabs = new();
+        
         [SerializeField] private List<Transform> _spawnPoints = new();
 
         [SerializeField] private float _spawnFrequency;
@@ -22,11 +20,13 @@ namespace SurvivalShooter.Enemy
         private bool _isSpawning;
 
         private IGameService _gameService;
+        private IPoolService _poolService;
 
         private void Start()
         {
             _gameService = ServiceLocator.Get<IGameService>();
-
+            _poolService = ServiceLocator.Get<IPoolService>();
+            
             _gameService.OnGameStart += EnableSpawning;
             _gameService.OnGameLose += DisableSpawning;
         }
@@ -41,7 +41,7 @@ namespace SurvivalShooter.Enemy
         {
             _spawnTimer += Time.deltaTime;
 
-            if(_isSpawning && _spawnTimer >= _spawnFrequency)
+            if (_isSpawning && _spawnTimer >= _spawnFrequency)
             {
                 SpawnEnemy();
                 _spawnTimer = 0f;
@@ -50,7 +50,13 @@ namespace SurvivalShooter.Enemy
 
         private void SpawnEnemy()
         {
-            var enemyController = Instantiate(_enemyControllerPrefabs[Random.Range(0, _enemyControllerPrefabs.Count)], transform);
+            List<PoolKey> enemyPoolKeys = new(){
+                PoolKey.Zombunny,
+                PoolKey.Zombear,
+                PoolKey.Hellephant,
+            };
+
+            var enemyController = _poolService.EnemyPool.Get(enemyPoolKeys[Random.Range(0, 3)], transform);
 
             int randomSpawnPointIndex = Random.Range(0, _spawnPoints.Count);
 
@@ -62,6 +68,8 @@ namespace SurvivalShooter.Enemy
 
         private void EnableSpawning()
         {
+            _spawnTimer = 0f;
+
             _isSpawning = true;
         }
 

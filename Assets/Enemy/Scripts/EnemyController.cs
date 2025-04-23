@@ -1,4 +1,6 @@
+using SurvivalShooter.Game;
 using SurvivalShooter.Pooling;
+using SurvivalShooter.Services;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,14 +21,31 @@ namespace SurvivalShooter.Enemy
         public Transform PlayerTransform { get; set; }
         public PoolKey PoolKey { get; set; }
 
+        private IGameService _gameService;
+        private IPoolService _poolService;
+        
+        private void Awake()
+        {
+            _gameService = ServiceLocator.Get<IGameService>();
+            _poolService = ServiceLocator.Get<IPoolService>();
+        }
+        
         public void Initialize()
         {
+            _enemyMovement.EnableEnemyMovement();
+            _enemyHealth.ResetEnemyHealth();
             
+            _gameService.OnGameReset += ReturnToPool;
         }
 
         public void Terminate()
         {
+            _gameService.OnGameReset -= ReturnToPool;
+        }
 
+        private void ReturnToPool()
+        {
+            _poolService.EnemyPool.Return(this);
         }
     }
 }

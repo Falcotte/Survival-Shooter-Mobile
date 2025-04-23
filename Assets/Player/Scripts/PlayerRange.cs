@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using SurvivalShooter.Enemy;
+using SurvivalShooter.Game;
+using SurvivalShooter.Services;
 using UnityEngine;
 
 namespace SurvivalShooter.Player
@@ -8,14 +10,25 @@ namespace SurvivalShooter.Player
     {
         private List<EnemyController> _enemiesInRange = new();
 
+        private IGameService _gameService;
+        
+        private void Awake()
+        {
+            _gameService = ServiceLocator.Get<IGameService>();
+        }
+        
         private void OnEnable()
         {
             EnemyHealth.OnEnemyDeath += RemoveEnemyFromRange;
+            
+            _gameService.OnGameReset += _enemiesInRange.Clear;
         }
 
         private void OnDisable()
         {
             EnemyHealth.OnEnemyDeath -= RemoveEnemyFromRange;
+            
+            _gameService.OnGameReset -= _enemiesInRange.Clear;
         }
 
         private void OnTriggerEnter(Collider other)

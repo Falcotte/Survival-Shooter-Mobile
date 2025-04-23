@@ -15,8 +15,10 @@ namespace SurvivalShooter.Enemy
         private bool _playerInRange;
         private float _timer;
 
-        private void Start()
+        private void OnEnable()
         {
+            _playerInRange = false;
+            
             _timer = _timeBetweenAttacks;
         }
 

@@ -30,7 +30,7 @@ namespace SurvivalShooter.Enemy
         [SerializeField] private float _sinkSpeed = 2.5f;
 
         [SerializeField] private int _scoreValue = 10;
-
+        
         private IAudioService _audioService;
         private IPoolService _poolService;
 
@@ -47,7 +47,7 @@ namespace SurvivalShooter.Enemy
             _poolService = ServiceLocator.Get<IPoolService>();
 
             _particleSystemPool = _poolService.ParticleSystemPool;
-
+            
             _currentHealth = _startingHealth;
         }
 
@@ -57,6 +57,24 @@ namespace SurvivalShooter.Enemy
             {
                 transform.Translate(-Vector3.up * _sinkSpeed * Time.deltaTime);
             }
+        }
+
+        public void ResetEnemyHealth()
+        {
+            _currentHealth = _startingHealth;
+
+            _isDead = false;
+            _isSinking = false;
+            
+            transform.localPosition = Vector3.zero;
+            
+            _capsuleCollider.enabled = true;
+            
+            _enemyController.NavMeshAgent.enabled = true;
+            _rigidbody.isKinematic = false;
+            
+            _enemyController.Animator.Rebind();
+            _enemyController.Animator.Update(0f);
         }
 
         public void TakeDamage(int amount, Vector3 hitPoint)
@@ -115,7 +133,7 @@ namespace SurvivalShooter.Enemy
 
             _isSinking = true;
 
-            Destroy(_enemyController.gameObject, 2f);
+            _poolService.EnemyPool.Return(_enemyController, 2f);
         }
     }
 }

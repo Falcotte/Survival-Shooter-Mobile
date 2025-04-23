@@ -10,6 +10,7 @@ namespace SurvivalShooter.Game
 
         public UnityAction OnGameStart { get; set; }
         public UnityAction OnGameLose { get; set; }
+        public UnityAction OnGameReset { get; set; }
         public UnityAction<GameState> OnGameStateChange { get; set; }
 
         private void ChangeState(GameState gameState)
@@ -36,6 +37,11 @@ namespace SurvivalShooter.Game
             OnGameLose?.Invoke();
             
             ChangeState(GameState.GameLose);
+        }
+
+        public void ResetGame()
+        {
+            OnGameReset?.Invoke();
         }
     }
 }

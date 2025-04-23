@@ -7,6 +7,7 @@ namespace SurvivalShooter.Game
     {
         public UnityAction OnGameStart { get; set; }
         public UnityAction OnGameLose { get; set; }
+        public UnityAction OnGameReset { get; set; }
         public UnityAction<GameState> OnGameStateChange { get; set; }
 
         public void GoToMainMenuState();
@@ -14,5 +15,7 @@ namespace SurvivalShooter.Game
         public void StartGame();
 
         public void LoseGame();
+        
+        public void ResetGame();
     }
 }

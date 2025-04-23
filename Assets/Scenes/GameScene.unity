@@ -898,15 +898,15 @@ MonoBehaviour:
     m_values:
     - _poolable: {fileID: 8431487005675951428, guid: 7537b60fe7d81d64e8388babdd74de39,
         type: 3}
-      _initialSize: 10
+      _initialSize: 2
       _maxSize: 50
     - _poolable: {fileID: 8431487005675951428, guid: 53fa5517755fded46b28aee74c169f66,
         type: 3}
-      _initialSize: 10
+      _initialSize: 2
       _maxSize: 50
     - _poolable: {fileID: 8431487005675951428, guid: a155d77a157d52a4b81c0197fbfcbf8f,
         type: 3}
-      _initialSize: 10
+      _initialSize: 2
       _maxSize: 50
 --- !u!1 &1189945166
 GameObject:
@@ -1353,6 +1353,7 @@ MonoBehaviour:
   _stateCameras:
   - {fileID: 1458007169}
   - {fileID: 1768279065}
+  - {fileID: 1453471868}
   _mainCamera: {fileID: 330585545}
 --- !u!4 &1720050755
 Transform:

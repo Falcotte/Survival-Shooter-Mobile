@@ -29,6 +29,13 @@ namespace SurvivalShooter.Enemy
             }
         }
 
+        public void EnableEnemyMovement()
+        {
+            _isPlayerDead = false;
+            
+            _enemyController.NavMeshAgent.enabled = true;
+        }
+
         private void DisableEnemyMovement()
         {
             _isPlayerDead = true;
